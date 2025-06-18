@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VIP A STORE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+    
+    :root {
+      --primary-dark: #8B0000;
+      --primary: #FF0000;
+      --primary-light: #FF6347;
+      --white: #ffffff;
+      --black: #000000;
+      --light-bg: #FFF0F0;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, var(--black) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+      min-height: 100vh;
+      padding-bottom: 2rem;
+      overflow-x: hidden;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      padding: 1.8rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      border-bottom: 3px solid var(--primary-light);
+      margin-bottom: 20px;
+    }
+    
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1), transparent 70%);
+    }
+    
+    .store-name {
+      font-family: 'Tajawal', sans-serif;
+      font-weight: 900;
+      font-size: 3.5rem;
+      color: var(--white);
+      text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
+      margin: 0;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 2px;
+      animation: glow-pulse 2s infinite alternate, float 4s ease-in-out infinite;
+    }
+    
+    @keyframes glow-pulse {
+      0% { text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5); }
+      100% { text-shadow: 0 0 25px rgba(255, 0, 0, 0.9), 0 0 50px rgba(255, 0, 0, 0.7); }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    
+    .important-section {
+      border: 2px solid var(--primary-light);
+      background: rgba(139, 0, 0, 0.3);
+      margin: 1.8rem auto;
+      padding: 1.4rem;
+      border-radius: 15px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      max-width: 95%;
+      backdrop-filter: blur(5px);
+      border-left: 5px solid var(--primary);
+      animation: pulse-border 2s infinite alternate;
+    }
+    
+    @keyframes pulse-border {
+      0% { border-left-color: var(--primary); }
+      100% { border-left-color: var(--primary-light); }
+    }
+    
+    .important-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--primary);
+    }
+    
+    .input-container {
+      margin: 35px auto 20px auto;
+      text-align: center;
+      max-width: 500px;
+      padding: 0 15px;
+    }
+    
+    .input-container label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--white);
+      font-size: 1.2rem;
+      text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    }
+    
+    .input-container input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 2px solid var(--primary);
+      font-size: 1.1rem;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s ease;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    }
+    
+    .input-container input:focus {
+      outline: none;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 20px rgba(255, 99, 71, 0.5);
+      transform: scale(1.02);
+    }
+    
+    .products-container {
+      margin: 2rem auto;
+      max-width: 600px;
+      padding: 0 15px;
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    
+    .field {
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      padding: 18px 15px;
+      background: rgba(139, 0, 0, 0.2);
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+    
+    .field::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255, 0, 0, 0.3), transparent);
+      transition: width 0.4s ease;
+    }
+    
+    .field:hover::before {
+      width: 100%;
+    }
+    
+    .field:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+      border-color: var(--primary-light);
+    }
+    
+    .field.selected {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-color: var(--primary-light);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+    }
+    
+    .field.selected span {
+      color: var(--white);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    }
+    
+    .field span {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .diamond-icon {
+      color: #FFD700;
+      text-shadow: 0 0 10px #FFD700;
+    }
+    
+    .box-icon {
+      color: #FFA500;
+      text-shadow: 0 0 10px #FFA500;
+    }
+    
+    .payment-methods {
+      text-align: center;
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 0 15px;
+    }
+    
+    .payment-btn {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      min-width: 180px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .payment-btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .payment-btn:hover::after {
+      opacity: 1;
+    }
+    
+    .payment-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 0, 0, 0.4);
+    }
+    
+    .payment-btn:active {
+      transform: translateY(0);
+    }
+    
+    .payment-btn.my-cash {
+      background: linear-gradient(135deg, #8B0000, #FF0000);
+    }
+    
+    .payment-btn.bank {
+      background: linear-gradient(135deg, #B22222, #FF4500);
+    }
+    
+    .payment-details {
+      display: none;
+      width: 90%;
+      max-width: 500px;
+      margin: 25px auto;
+      padding: 25px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
+      border: 1px solid var(--primary);
+      animation: fadeIn 0.6s ease;
+      backdrop-filter: blur(5px);
+      border-top: 3px solid var(--primary-light);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .payment-details p {
+      margin: 15px 0;
+      font-size: 1.15rem;
+      color: var(--white);
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(139, 0, 0, 0.3);
+      border: 1px solid var(--primary);
+    }
+    
+    .payment-details p:first-child {
+      margin-top: 0;
+    }
+    
+    .payment-details p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .notice {
+      width: 90%;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #B22222, #8B0000);
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 15px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      box-shadow: 0 5px 20px rgba(178, 34, 34, 0.5);
+      animation: glow 1.5s infinite alternate, pulse 2s infinite;
+      position: relative;
+      overflow: hidden;
+      font-size: 1.1rem;
+      border: 1px solid var(--primary-light);
+    }
+    
+    .notice::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes glow {
+      from { box-shadow: 0 0 15px rgba(255,0,0,0.6); }
+      to { box-shadow: 0 0 25px rgba(255,0,0,0.9); }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes shine {
+      to {
+        transform: translateX(100%) translateY(100%) rotate(30deg);
+      }
+    }
+    
+    #checkoutBtn {
+      display: block;
+      width: 90%;
+      max-width: 500px;
+      margin: 35px auto;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: var(--white);
+      border: none;
+      border-radius: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.3rem;
+      font-family: 'Tajawal', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--primary-light);
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+    
+    #checkoutBtn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.8s ease;
+    }
+    
+    #checkoutBtn:hover::before {
+      left: 100%;
+    }
+    
+    #checkoutBtn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    }
+    
+    #checkoutBtn:active {
+      transform: translateY(0);
+    }
+    
+    .confetti {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background-color: var(--primary);
+      opacity: 0;
+      z-index: 9999;
+      animation: confetti-fall 4s ease-out forwards;
+    }
+    
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .section-title {
+      text-align: center;
+      margin: 25px 0 20px;
+      color: var(--white);
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 3px;
+      background: var(--primary);
+      margin: 10px auto;
+      border-radius: 3px;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    .fire-effect {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(transparent, rgba(255,0,0,0.3));
+      z-index: -1;
+      animation: fire 2s infinite alternate;
+    }
+    
+    @keyframes fire {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.7; }
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      animation: float-particle 15s infinite linear;
+    }
+    
+    @keyframes float-particle {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+  <div class="fire-effect"></div>
+  
+  <header>
+    <h1 class="store-name">𝑽𝑰𝑷𝑶 𝒂 𝒔𝒕𝒐𝒓𝒆</h1>
+  </header>
+
+  <div class="important-section">
+    <strong><i class="fas fa-bell"></i> مهم:</strong> خدمة الشحن يومياً الساعة 6 مساءً بتوقيت السودان
+  </div>
+
+  <div class="input-container">
+    <label for="player-id"><i class="fas fa-id-card"></i> ID اللاعب</label>
+    <input type="number" id="player-id" maxlength="13" placeholder="أدخل ID الخاص بك">
+  </div>
+
+  <h2 class="section-title">المنتجات</h2>
+  
+  <div class="products-container">
+    <div class="products-grid">
+      <div class="field" onclick="selectProduct(this)">
+        <span>2400ج.س</span> 
+        <div>ماسة 110 <i class="diamond-icon fas fa-gem"></i></div>
+      </div>
+      
+      <div class="field" onclick="selectProduct(this)">
+        <span>4800ج.س</span> 
+        <div>ماسة 220 <i class="diamond-icon fas fa-gem"></i></div>
+      </div>
+      
+      <div class="field" onclick="selectProduct(this)">
+        <span>7200ج.س</span> 
+        <div>ماسة 330 <i class="diamond-icon fas fa-gem"></i></div>
+      </div>
+      
+      <div class="field" onclick="selectProduct(this)">
+        <span>12000ج.س</span> 
+        <div>ماسة 520 <i class="diamond-icon fas fa-gem"></i></div>
+      </div>
+      
+      <div class="field" onclick="selectProduct(this)">
+        <span>24000ج.س</span> 
+        <div>ماسة 1160 <i class="diamond-icon fas fa-gem"></i></div>
+      </div>
+      
+      <div class="field" onclick="selectProduct(this)">
+        <span>48000ج.س</span> 
+        <div>ماسة 2180 <i class="diamond-icon fas fa-gem"></i></div>
+      </div>
+      
+      <div class="field" onclick="selectProduct(this)">
+        <span>4800ج.س</span> 
+        <div>عضوية أسبوعية <i class="box-icon fas fa-cube"></i></div>
+      </div>
+      
+      <div class="field" onclick="selectProduct(this)">
+        <span>17000ج.س</span> 
+        <div>عضوية شهرية <i class="box-icon fas fa-cube"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">طرق الدفع</h2>
+  
+  <div class="payment-methods">
+    <button class="payment-btn my-cash" onclick="showPayment('mycash')">
+      <i class="fas fa-mobile-alt"></i> ماي كاشي 🟣
+    </button>
+    <button class="payment-btn bank" onclick="showPayment('bank')">
+      <i class="fas fa-university"></i> بنكك 🔴
+    </button>
+  </div>
+
+  <div id="mycash-details" class="payment-details">
+    <p><i class="fas fa-phone"></i> رقم الحساب: 796899</p>
+    <p><i class="fas fa-user"></i> اسم الحساب: محمد عوض</p>
+  </div>
+
+  <div id="bank-details" class="payment-details">
+    <p><i class="fas fa-phone"></i> رقم الحساب: 4067472</p>
+    <p><i class="fas fa-user"></i> اسم الحساب: مصعب عوض</p>
+  </div>
+
+  <div class="notice">
+    <i class="fas fa-exclamation-triangle"></i> ⚠️ يرجى إرسال الشعار بعد الطلب في الواتساب. شكراً لك!
+  </div>
+
+  <button id="checkoutBtn">
+    <i class="fas fa-shopping-cart"></i> إتمام عملية الشراء
+  </button>
+
+  <footer>
+    <p>𝑽𝑰𝑷𝑶 𝒂 𝒔𝒕𝒐𝒓𝒆 &copy; 2023 | خدمة العملاء: +249119805326</p>
+  </footer>
+
+  <!-- Sound Effects -->
+  <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3" preload="auto"></audio>
+  <audio id="selectSound" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3" preload="auto"></audio>
+  <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" preload="auto"></audio>
+  <audio id="typingSound" src="https://assets.mixkit.co/sfx/preview/mixkit-keyboard-typing-1386.mp3" preload="auto"></audio>
+
+  <script>
+    // إنشاء جزيئات متحركة
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 100;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // وضع عشوائي
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.top = Math.random() * 100 + 'vh';
+        
+        // حجم عشوائي
+        const size = Math.random() * 4 + 1;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        // تأخير عشوائي للحركة
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    let selectedProduct = null;
+    const clickSound = document.getElementById('clickSound');
+    const selectSound = document.getElementById('selectSound');
+    const successSound = document.getElementById('successSound');
+    const typingSound = document.getElementById('typingSound');
+    
+    // Play sound function with error handling
+    function playSound(sound) {
+      try {
+        sound.currentTime = 0;
+        sound.play().catch(e => console.log("Sound playback prevented:", e));
+      } catch(e) {
+        console.log("Sound error:", e);
+      }
+    }
+    
+    // Select product function
+    function selectProduct(element) {
+      // Remove selected class from all products
+      document.querySelectorAll('.field').forEach(field => {
+        field.classList.remove('selected');
+      });
+      
+      // Add selected class to clicked product
+      element.classList.add('selected');
+      selectedProduct = element.textContent.trim();
+      playSound(selectSound);
+    }
+    
+    // Show payment details
+    function showPayment(type) {
+      playSound(clickSound);
+      document.getElementById('mycash-details').style.display = 'none';
+      document.getElementById('bank-details').style.display = 'none';
+      document.getElementById(type + '-details').style.display = 'block';
+    }
+
+    // Create confetti effect
+    function createConfetti() {
+      const colors = ['#FF0000', '#8B0000', '#FF6347', '#B22222', '#FFFFFF', '#FFA500'];
+      for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = Math.random() * 12 + 6 + 'px';
+        confetti.style.height = Math.random() * 12 + 6 + 'px';
+        confetti.style.animationDuration = Math.random() * 3 + 3 + 's';
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => {
+          confetti.remove();
+        }, 4000);
+      }
+    }
+
+    // Checkout button functionality
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+      const idInput = document.getElementById('player-id');
+      if (!idInput.value) {
+        alert('الرجاء إدخال ID الحساب');
+        return;
+      }
+      
+      if (!selectedProduct) {
+        alert('الرجاء اختيار منتج');
+        return;
+      }
+
+      let paymentDetails = '';
+      if (document.getElementById('mycash-details').style.display === 'block') {
+        paymentDetails = 'ماي كاشي - 796899 - محمد عوض';
+      } else if (document.getElementById('bank-details').style.display === 'block') {
+        paymentDetails = 'بنك - 4067472 - مصعب عوض';
+      } else {
+        alert('الرجاء اختيار طريقة الدفع');
+        return;
+      }
+
+      playSound(successSound);
+      createConfetti();
+      
+      setTimeout(() => {
+        const message = `ID: ${idInput.value}\nالمنتج: ${selectedProduct}\nطريقة الدفع: ${paymentDetails}\n\nيرجى إرسال صورة الشعار الآن`;
+        window.open(`https://wa.me/249119805326?text=${encodeURIComponent(message)}`, '_blank');
+      }, 1200);
+    });
+    
+    // Add floating animation to some elements
+    document.querySelectorAll('.store-name, .notice').forEach(el => {
+      el.classList.add('floating');
+    });
+    
+    // Initialize payment method to first one
+    document.addEventListener('DOMContentLoaded', function() {
+      showPayment('mycash');
+      createParticles();
+      
+      // Add typing sound effect
+      const idInput = document.getElementById('player-id');
+      idInput.addEventListener('input', function() {
+        playSound(typingSound);
+      });
+    });
+  </script>
+</body>
+</html>
